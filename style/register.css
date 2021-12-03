@@ -1,0 +1,114 @@
+@import url("https://fonts.googleapis.com/css2?family=Balsamiq+Sans&family=Genos&display=swap");
+
+*,
+*:before,
+*:after {
+  padding: 0;
+  margin: 0;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  background: url("/bg.jpg") fixed;
+  background-size: cover;
+  padding: 0;
+  margin: 0;
+}
+
+.wrap {
+  background: rgba(0, 0, 0, 0.8);
+  height: 100%;
+  min-height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 99;
+}
+
+h1.head {
+  font-family: "Balsamiq Sans", cursive;
+  color: #fff;
+  font-size: 40px;
+  font-weight: 800;
+  text-align: center;
+  text-transform: capitalize;
+  position: absolute;
+  top: 100px;
+  left: 11.5em;
+}
+
+p.title {
+  font-family: "Balsamiq Sans", cursive;
+  color: #fff;
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 20%;
+  margin-bottom: 30px;
+}
+
+form {
+  width: 250px;
+  margin: 0 auto;
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="email"],
+form input[type="name"] {
+  font-family: "Open Sans", sans-serif;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  border: 0;
+  border-bottom: 1px solid #fff;
+  background: 0;
+  width: 100%;
+  padding: 5px 10px;
+  margin: 0;
+  margin-bottom: 5px;
+  outline: 0;
+}
+
+form input[type="submit"] {
+  font-family: "Open Sans", sans-serif;
+  color: #fff;
+  background: #176fc1;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 500;
+  width: 100%;
+  padding: 7px;
+  margin-top: 16px;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+}
+
+form input[type="submit"]:hover {
+  transition: background-color 0.5s ease;
+  background-color: #ce0f3e;
+}
+
+.new {
+  position: absolute;
+  bottom: 130px;
+  left: 35em;
+}
+
+.new p {
+  color: #fff;
+  font-family: "Open Sans", sans-serif;
+  font-size: 12px;
+}
+
+.register a span {
+  color: #fff;
+  cursor: pointer;
+}

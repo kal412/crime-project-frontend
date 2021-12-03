@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- External CSS Links -->
+    <link rel="stylesheet" href="style/register.css" />
+    <title>Register</title>
+  </head>
+
+  <body>
+    <!-- Register Section Starts -->
+    <div class="wrap">
+      <h1 class="head">Crime Reporting System</h1>
+      <p class="title">Register</p>
+      <!-- Form Detail Starts -->
+      <form id="register-form">
+        <input id="fname" type="text" placeholder="First Name" validate />
+        <input id="lname" type="text" placeholder="Last name" validate />
+        <input
+          id="email"
+          type="email"
+          placeholder="Enter Your Email"
+          validate
+        />
+        <input
+          id="username"
+          type="name"
+          placeholder="Enter Username"
+          validate
+        />
+        <input
+          id="password"
+          type="password"
+          placeholder="Enter Your Password"
+          validate
+        />
+        <input type="submit" value="Register" validate />
+      </form>
+      <!-- Form Detail Ends -->
+      <div class="new">
+        <p class="new-here">
+          Already Have an Account?
+          <span><a style="color: #ce0f3e" href="signin.html">SignIn</a></span>
+        </p>
+      </div>
+    </div>
+    <!-- Register Section Starts -->
+  </body>
+  <script src="./js/register.js"></script>
+</html>

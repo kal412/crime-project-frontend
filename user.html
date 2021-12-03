@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- External Minifier CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+    />
+
+    <!-- External Minifier JS -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <!-- External CSS Custom Links -->
+    <link rel="stylesheet" href="style/user.css" />
+
+    <!-- External JS Custom Linnks -->
+
+    <title>Crime Reporting System</title>
+  </head>
+
+  <body>
+    <nav
+      class="navbar navbar-inverse navbar-global navbar-fixed-top"
+      style="background: darkblue"
+    >
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button
+            type="button"
+            class="navbar-toggle collapsed"
+            data-toggle="collapse"
+            data-target="#navbar"
+            aria-expanded="false"
+            aria-controls="navbar"
+          >
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="user.html" style="color: #fff" class="navbar-brand" href="#"
+            >Home</a
+          >
+          <a
+            href="history.html"
+            style="color: #fff"
+            class="navbar-brand"
+            href="#"
+            >History</a
+          >
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-user navbar-right">
+            <li>
+              <a style="color: #fff" href="#"
+                ><span class="glyphicon glyphicon-user"></span>
+                <span id="user"></span>
+              </a>
+            </li>
+            <li>
+              <a id="log-out" style="color: #fff" href="#"
+                ><span class="glyphicon glyphicon-log-out"></span> Logout</a
+              >
+            </li>
+          </ul>
+        </div>
+        <!--/.nav-collapse -->
+      </div>
+    </nav>
+    <section>
+      <form id="report-form">
+        <header>
+          <h2>Drop Your Report</h2>
+          <div
+            style="
+              font-family: 'Open Sans', sans-serif;
+              font-size: 20px;
+              color: rgb(209, 151, 151);
+              margin-left: 100px;
+            "
+          >
+            ! Please you are requested to fill the form with true and authentic
+            report.
+          </div>
+        </header>
+
+        <div>
+          <label class="desc" id="title1" for="Field1">Date</label>
+          <div>
+            <input
+              id="date"
+              name="date"
+              type="date"
+              class="field text fn"
+              value=""
+              size="8"
+              tabindex="1"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label class="desc" id="title1" for="Field1">Phone Number</label>
+          <div>
+            <input
+              id="phone"
+              name="Field1"
+              type="text"
+              class="field text fn"
+              value=""
+              size="8"
+              tabindex="1"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label class="desc" id="title3" for="Field3"> Address </label>
+          <div>
+            <input
+              id="address"
+              name="Field3"
+              type="text"
+              spellcheck="false"
+              value=""
+              maxlength="255"
+              tabindex="3"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label class="desc" id="title4" for="Field4"> Description </label>
+
+          <div>
+            <textarea
+              style="border: 2px solid #000"
+              id="description"
+              name="Field4"
+              spellcheck="true"
+              rows="10"
+              cols="50"
+              tabindex="4"
+            ></textarea>
+          </div>
+        </div>
+        <div>
+          <label class="desc" id="title106" for="Field106">
+            Select a Crime Category
+          </label>
+          <div>
+            <select
+              id="category"
+              name="Field106"
+              class="field select medium"
+              tabindex="11"
+            ></select>
+          </div>
+        </div>
+
+        <div>
+          <div>
+            <input id="saveForm" name="saveForm" type="submit" value="Submit" />
+          </div>
+        </div>
+      </form>
+    </section>
+    <script src="./js/user.js"></script>
+  </body>
+  <script>
+    $(".btn-expand-collapse").click(function (e) {
+      $(".navbar-primary").toggleClass("collapsed");
+    });
+  </script>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- External CSS Links -->
+    <link rel="stylesheet" href="style/user.css" />
+    <link rel="stylesheet" href="style/history.css" />
+
+    <!-- External Minifier Links -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+    />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <title>User History</title>
+  </head>
+
+  <body>
+    <!-- Navbar Starts -->
+    <nav
+      class="navbar navbar-inverse navbar-global navbar-fixed-top"
+      style="background: darkblue"
+    >
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button
+            type="button"
+            class="navbar-toggle collapsed"
+            data-toggle="collapse"
+            data-target="#navbar"
+            aria-expanded="false"
+            aria-controls="navbar"
+          >
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="user.html" style="color: #fff" class="navbar-brand" href="#"
+            >Home</a
+          >
+          <a
+            href="history.html"
+            style="color: #fff"
+            class="navbar-brand"
+            href="#"
+            >History</a
+          >
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-user navbar-right">
+            <li>
+              <a style="color: #fff" href="#"
+                ><span class="glyphicon glyphicon-user"></span>
+                <span id="user"></span>
+              </a>
+            </li>
+            <li>
+              <a id="log-out" style="color: #fff" href="#"
+                ><span class="glyphicon glyphicon-log-out"></span> Logout</a
+              >
+            </li>
+          </ul>
+        </div>
+        <!--/.nav-collapse -->
+      </div>
+    </nav>
+    <!-- Navbar Ends -->
+
+    <!-- User Report Content Starts -->
+    <table class="table">
+      <caption>
+        Your History
+      </caption>
+      <thead>
+        <tr>
+          <th scope="col">Reported date</th>
+          <th scope="col">Crime type</th>
+          <th scope="col">Description</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody id="table-body"></tbody>
+    </table>
+
+    <!-- User Report Content Ends-->
+    <script src="./js/history.js"></script>
+  </body>
+</html>

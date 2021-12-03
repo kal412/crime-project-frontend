@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans&family=Genos&display=swap');
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing   : border-box;
+    box-sizing        : border-box;
+}
+
+body {
+    padding   : 20px 15%;
+    background: url(https://s.cdpn.io/44759/dark_blue_background-wide.jpg) no-repeat top center #343838;
+}
+
+
+form header {
+    margin     : 0 0 20px 0;
+    margin-top : 40px;
+    margin-left: 100px;
+}
+
+form header div {
+    font-size: 90%;
+    color    : #999;
+}
+
+form header h2 {
+    margin     : 0 0 5px 0;
+    font-family: 'Balsamiq Sans', cursive;
+    margin-left: 100px;
+    font-size  : 40px;
+    font-weight: 800;
+    color      : #fff;
+}
+
+form>div {
+    clear   : both;
+    overflow: hidden;
+    padding : 1px;
+    margin  : 0 0 10px 0;
+}
+
+form>div>fieldset>div>div {
+    margin: 0 0 5px 0;
+}
+
+form>div>label,
+legend {
+    width        : 25%;
+    float        : left;
+    padding-right: 10px;
+    color        : #fff;
+    font-weight  : 800;
+    font-family  : 'Open Sans', sans-serif;
+    font-size    : 15px;
+}
+
+form>div>div,
+form>div>fieldset>div {
+    width: 75%;
+    float: right;
+}
+
+form>div>fieldset label {
+    font-size: 90%;
+}
+
+fieldset {
+    border : 0;
+    padding: 0;
+}
+
+input[type=text],
+input[type=email],
+input[type=url],
+input[type=password],
+textarea {
+    width        : 100%;
+    border-top   : 1px solid #ccc;
+    border-left  : 1px solid #ccc;
+    border-right : 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+input[type=text],
+input[type=email],
+input[type=url],
+input[type=password] {
+    width : 50%;
+    border: 2px solid #000;
+}
+
+input[type=text]:focus,
+input[type=email]:focus,
+input[type=url]:focus,
+input[type=password]:focus,
+textarea:focus {
+    outline     : 0;
+    border-color: #4697e4;
+}
+
+@media (max-width: 600px) {
+    form>div {
+        margin: 0 0 15px 0;
+    }
+
+    form>div>label,
+    legend {
+        width : 100%;
+        float : none;
+        margin: 0 0 5px 0;
+    }
+
+    form>div>div,
+    form>div>fieldset>div {
+        width: 100%;
+        float: none;
+    }
+
+    input[type=text],
+    input[type=email],
+    input[type=url],
+    input[type=password],
+    textarea,
+    select {
+        width: 100%;
+    }
+}
+
+#saveForm {
+    background   : darkblue;
+    color        : #fff;
+    border       : 2px solid darkblue;
+    font-family  : 'Balsamiq Sans', cursive;
+    font-size    : 20px;
+    border-radius: 5px 0 5px 0;
+}
+
+@media (min-width: 1200px) {
+
+    form>div>label,
+    legend {
+        text-align: right;
+    }
+}

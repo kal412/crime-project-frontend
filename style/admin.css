@@ -1,0 +1,229 @@
+.marginlefting {
+  margin-left: 60px !important;
+}
+
+.displaynone {
+  display: none !important;
+}
+
+.displayblock {
+  display: block !important;
+}
+
+.sidebar .item i {
+  font-size: 24px;
+  margin-top: -5px !important;
+}
+
+.title.item {
+  padding: 0.92857143em 1.14285714em !important;
+}
+
+.dropdown .menu .header {
+  padding-top: 3.9px !important;
+  padding-bottom: 3.9px !important;
+}
+
+.search {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  margin-right: 28em;
+}
+
+.search input {
+  width: 200px;
+  border: 2px solid #000;
+}
+
+.search button {
+  border: 2px solid gray;
+  background: gray;
+  color: #fff;
+  border-radius: 5px;
+}
+
+table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+table caption {
+  font-size: 1.5em;
+  margin: 0.5em 0 0.75em;
+}
+
+table tr {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: 0.35em;
+}
+
+table th,
+table td {
+  padding: 0.625em;
+  text-align: center;
+}
+
+table th {
+  font-size: 0.85em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+  }
+
+  table caption {
+    font-size: 1.3em;
+  }
+
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: 0.625em;
+  }
+
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: 0.8em;
+    text-align: right;
+  }
+
+  table td::before {
+    /*
+      * aria-label has no advantage, it won't be read inside a table
+      content: attr(aria-label);
+      */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  table td:last-child {
+    border-bottom: 0;
+  }
+}
+
+.table {
+  max-width: 60%;
+  margin-left: 30em;
+}
+
+/* Loading Spinner */
+@keyframes ldio-s0ew1rl6mvq {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.ldio-s0ew1rl6mvq div {
+  left: 47px;
+  top: 25px;
+  position: absolute;
+  animation: ldio-s0ew1rl6mvq linear 1s infinite;
+  background: #211f20;
+  width: 6px;
+  height: 10px;
+  border-radius: 3px / 5px;
+  transform-origin: 3px 25px;
+}
+.ldio-s0ew1rl6mvq div:nth-child(1) {
+  transform: rotate(0deg);
+  animation-delay: -0.9166666666666666s;
+  background: #211f20;
+}
+.ldio-s0ew1rl6mvq div:nth-child(2) {
+  transform: rotate(30deg);
+  animation-delay: -0.8333333333333334s;
+  background: #211f20;
+}
+.ldio-s0ew1rl6mvq div:nth-child(3) {
+  transform: rotate(60deg);
+  animation-delay: -0.75s;
+  background: #211f20;
+}
+.ldio-s0ew1rl6mvq div:nth-child(4) {
+  transform: rotate(90deg);
+  animation-delay: -0.6666666666666666s;
+  background: #211f20;
+}
+.ldio-s0ew1rl6mvq div:nth-child(5) {
+  transform: rotate(120deg);
+  animation-delay: -0.5833333333333334s;
+  background: #211f20;
+}
+.ldio-s0ew1rl6mvq div:nth-child(6) {
+  transform: rotate(150deg);
+  animation-delay: -0.5s;
+  background: #211f20;
+}
+.ldio-s0ew1rl6mvq div:nth-child(7) {
+  transform: rotate(180deg);
+  animation-delay: -0.4166666666666667s;
+  background: #211f20;
+}
+.ldio-s0ew1rl6mvq div:nth-child(8) {
+  transform: rotate(210deg);
+  animation-delay: -0.3333333333333333s;
+  background: #211f20;
+}
+.ldio-s0ew1rl6mvq div:nth-child(9) {
+  transform: rotate(240deg);
+  animation-delay: -0.25s;
+  background: #211f20;
+}
+.ldio-s0ew1rl6mvq div:nth-child(10) {
+  transform: rotate(270deg);
+  animation-delay: -0.16666666666666666s;
+  background: #211f20;
+}
+.ldio-s0ew1rl6mvq div:nth-child(11) {
+  transform: rotate(300deg);
+  animation-delay: -0.08333333333333333s;
+  background: #211f20;
+}
+.ldio-s0ew1rl6mvq div:nth-child(12) {
+  transform: rotate(330deg);
+  animation-delay: 0s;
+  background: #211f20;
+}
+.loadingio-spinner-spinner-k19t5qqx9v {
+  width: 34px;
+  height: 34px;
+  display: inline-block;
+  overflow: hidden;
+  background: none;
+}
+.ldio-s0ew1rl6mvq {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: translateZ(0) scale(0.34);
+  backface-visibility: hidden;
+  transform-origin: 0 0; /* see note above */
+}
+.ldio-s0ew1rl6mvq div {
+  box-sizing: content-box;
+}
