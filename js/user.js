@@ -7,8 +7,8 @@ var userCredentials = { token: "", username: "", id: "", auth: false };
 var logOut = document.getElementById("log-out");
 
 /* CHECK FOR TOKEN AND REDIRECT TO SIGNIN PAGE IF NOT AVAILABLE */
-if (localStorage.userCredentials) {
-  userCredentials = JSON.parse(localStorage.userCredentials);
+if (sessionStorage.userCredentials) {
+  userCredentials = JSON.parse(sessionStorage.userCredentials);
   user.innerText = userCredentials.username;
 } else {
   window.location.replace("/signin.html");
@@ -16,12 +16,16 @@ if (localStorage.userCredentials) {
 
 /* LOG OUT AND CLEAR TOKEN */
 logOut.addEventListener("click", () => {
-  localStorage.removeItem("userCredential");
+  sessionStorage.removeItem("userCredential");
   window.location.replace("/signin.html");
 });
 
 /* GET CRIME TYPES FROM DATABASE FOR DROPDOWN MENU */
-fetch("http://localhost:4000/api/crimes")
+fetch("http://localhost:4000/api/crimes", {
+  headers: {
+    Authorization: `Bearer ${userCredentials.token}`,
+  },
+})
   .then((data) => {
     return data.json();
   })

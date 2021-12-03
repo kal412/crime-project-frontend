@@ -4,8 +4,8 @@ var password = document.getElementById("password");
 var userCredentials = { token: "", username: "", id: "", auth: false };
 
 /* CHECK FOR TOKEN */
-if (localStorage.userCredentials) {
-  userCredentials = JSON.parse(localStorage.userCredentials);
+if (sessionStorage.userCredentials) {
+  userCredentials = JSON.parse(sessionStorage.userCredentials);
 }
 
 /* SIGN IN IF USER EXISTS */
@@ -26,7 +26,10 @@ signInForm.addEventListener("submit", (e) => {
     .then((result) => {
       console.log("Success:", result);
       userCredentials = result;
-      localStorage.setItem("userCredentials", JSON.stringify(userCredentials));
+      sessionStorage.setItem(
+        "userCredentials",
+        JSON.stringify(userCredentials)
+      );
       window.location.replace("/user.html");
     })
     .catch((error) => {

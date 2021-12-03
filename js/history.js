@@ -30,8 +30,8 @@ loadingDataRow.innerHTML = `
 `;
 
 /* CHECK FOR TOKEN AND REDIRECT TO SIGNIN PAGE IF NOT AVAILABLE */
-if (localStorage.userCredentials) {
-  userCredentials = JSON.parse(localStorage.userCredentials);
+if (sessionStorage.userCredentials) {
+  userCredentials = JSON.parse(sessionStorage.userCredentials);
   user.innerText = userCredentials.username;
 } else {
   window.location.replace("/signin.html");
@@ -39,7 +39,7 @@ if (localStorage.userCredentials) {
 
 /* LOG OUT AND CLEAR TOKEN */
 logOut.addEventListener("click", () => {
-  localStorage.removeItem("userCredential");
+  sessionStorage.removeItem("userCredential");
   window.location.replace("/signin.html");
 });
 
@@ -47,7 +47,11 @@ const updateTable = () => {
   tableBody.appendChild(loadingDataRow);
 
   /* GET CRIME REPORTS REPORTED BY THE USER */
-  fetch(`http://localhost:4000/api/lists/${userCredentials.username}`)
+  fetch(`http://localhost:4000/api/lists/${userCredentials.username}`, {
+    headers: {
+      Authorization: `Bearer ${userCredentials.token}`,
+    },
+  })
     .then((res) => res.json())
     .then((data) => {
       tableBody.innerHTML = "";
