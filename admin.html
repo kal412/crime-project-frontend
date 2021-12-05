@@ -17,7 +17,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.css"
     />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
-
+    <script src="./js/moment.js"></script>
     <title>Admin Panel</title>
   </head>
 
@@ -61,11 +61,11 @@
         <div class="search">
           <input
             type="search"
-            id="site-search"
+            id="filter-search"
             name="q"
             aria-label="Search through site content"
           />
-          <button style="margin-left: 10px">Filter</button>
+          <button style="margin-left: 10px" id="filter-button">Filter</button>
         </div>
         <div class="right menu">
           <a class="item"><i class="fa fa-user"> Kalyan Devkota</i> </a>
@@ -95,6 +95,24 @@
       </thead>
       <tbody id="table-body"></tbody>
     </table>
+
+    <!-- modal dialog -->
+    <div id="record-modal-dialog-box" class="modal-background">
+      <div class="modal-body">
+        <div class="modal-body__content">
+          <span onclick="hideRecordModalDialog()" class="modal-body__quit-btn"
+            >&times;</span
+          >
+          <div class="content-title">
+            <h3>Crime Type: <span id="record-dialog-box-title"></span></h3>
+            <p>Status: <span id="record-dialog-box-status"></span></p>
+          </div>
+
+          <p id="record-dialog-box-desc" class="content-description"></p>
+        </div>
+      </div>
+    </div>
+
     <!-- User Report Content Ends-->
     <script src="./js/admin.js"></script>
   </body>

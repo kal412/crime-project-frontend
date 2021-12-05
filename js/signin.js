@@ -1,7 +1,13 @@
 var signInForm = document.getElementById("signin-form");
 var username = document.getElementById("username");
 var password = document.getElementById("password");
-var userCredentials = { token: "", username: "", id: "", auth: false };
+var userCredentials = {
+  token: "",
+  refreshToken: "",
+  username: "",
+  id: "",
+  auth: false,
+};
 
 /* CHECK FOR TOKEN */
 if (sessionStorage.userCredentials) {

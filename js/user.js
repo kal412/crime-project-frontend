@@ -3,7 +3,13 @@ var user = document.getElementById("user");
 var date = document.getElementById("date");
 var description = document.getElementById("description");
 var category = document.getElementById("category");
-var userCredentials = { token: "", username: "", id: "", auth: false };
+var userCredentials = {
+  token: "",
+  refreshToken: "",
+  username: "",
+  id: "",
+  auth: false,
+};
 var logOut = document.getElementById("log-out");
 
 /* CHECK FOR TOKEN AND REDIRECT TO SIGNIN PAGE IF NOT AVAILABLE */
@@ -14,8 +20,41 @@ if (sessionStorage.userCredentials) {
   window.location.replace("/signin.html");
 }
 
+/* POST REFRESH TOKEN AND UPDATE TOKEN */
+let data = {
+  token: userCredentials.refreshToken,
+};
+fetch("http://localhost:4000/api/auth/refresh", {
+  method: "post",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify(data),
+})
+  .then((response) => response.json())
+  .then((result) => {
+    userCredentials.token = result;
+    console.log("Success:", result);
+  })
+  .catch((error) => {
+    console.error("Error:", error);
+  });
+
 /* LOG OUT AND CLEAR TOKEN */
 logOut.addEventListener("click", () => {
+  fetch("http://localhost:4000/api/auth/logout", {
+    method: "delete",
+    headers: {
+      Authorization: `Bearer ${userCredentials.refreshToken}`,
+    },
+  })
+    .then((response) => console.log(response))
+    .then((result) => {
+      console.log("Success:", result);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
   sessionStorage.removeItem("userCredential");
   window.location.replace("/signin.html");
 });
@@ -54,6 +93,7 @@ reportForm.addEventListener("submit", (e) => {
     method: "post",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${userCredentials.token}`,
     },
     body: JSON.stringify(data),
   })

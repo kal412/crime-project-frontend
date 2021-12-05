@@ -65,7 +65,7 @@ table tr {
 
 table th,
 table td {
-  padding: 0.625em;
+  padding: 5px;
   text-align: center;
 }
 
@@ -73,6 +73,11 @@ table th {
   font-size: 0.85em;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+}
+
+.status-button {
+  border: none;
+  background: transparent;
 }
 
 @media screen and (max-width: 600px) {
@@ -226,4 +231,56 @@ table th {
 }
 .ldio-s0ew1rl6mvq div {
   box-sizing: content-box;
+}
+
+/* modal style */
+
+.modal-background {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.623);
+  width: 100vw;
+  height: 100vh;
+}
+
+.modal-background .modal-body {
+  width: 700px;
+  height: 300px;
+  background-color: #fff;
+  color: #000;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modal-body__content {
+  position: relative;
+}
+
+.modal-body__quit-btn {
+  position: absolute;
+  right: 5px;
+  top: 2px;
+  cursor: pointer;
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.content-title {
+  padding: 5px 40px 5px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(194, 194, 194);
+}
+
+.content-description {
+  padding: 10px;
+  text-align: center;
 }
