@@ -59,6 +59,39 @@ if (sessionStorage.userCredentials) {
   window.location.replace("/signin.html");
 }
 
+/* POST REFRESH TOKEN AND UPDATE ACCESS TOKEN */
+
+const refreshToken = async () => {
+  try {
+    fetch("http://localhost:4000/api/auth/refresh", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ token: userCredentials.refreshToken }),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        userCredentials.token = result.accessToken;
+        sessionStorage.setItem(
+          "userCredentials",
+          JSON.stringify(userCredentials)
+        );
+        console.log("Success:", result);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+refreshToken();
+const interval = setInterval(() => {
+  refreshToken();
+}, 18000000);
+
 /* LOG OUT AND CLEAR TOKEN */
 logOut.addEventListener("click", () => {
   fetch("http://localhost:4000/api/auth/logout", {
@@ -91,7 +124,12 @@ filterButton.addEventListener("click", () => {
   const updateTable = () => {
     tableBody.appendChild(loadingDataRow);
 
-    fetch(`http://localhost:4000/api/lists/${filterValue}`)
+    fetch(`http://localhost:4000/api/lists/${filterValue}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userCredentials.token}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         recordList = data;
@@ -152,7 +190,12 @@ filterButton.addEventListener("click", () => {
 const updateTable = () => {
   tableBody.appendChild(loadingDataRow);
 
-  fetch("http://localhost:4000/api/lists")
+  fetch("http://localhost:4000/api/lists", {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${userCredentials.token}`,
+    },
+  })
     .then((res) => res.json())
     .then((data) => {
       tableBody.innerHTML = "";
@@ -221,6 +264,7 @@ function toggleReport(recordId, statusTo) {
     body: JSON.stringify(data),
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${userCredentials.token}`,
     },
   })
     .then((response) => response.json())

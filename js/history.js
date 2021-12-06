@@ -42,32 +42,45 @@ if (sessionStorage.userCredentials) {
   user.innerText = userCredentials.username;
 
   // CHECK IF THE USER IS USER
-  if (userCredentials.role !== 111) {
+  if (userCredentials.role === 222) {
     window.location.replace("/admin.html");
   }
 } else {
   window.location.replace("/signin.html");
 }
 
-/* POST REFRESH TOKEN AND UPDATE TOKEN */
-let data = {
-  token: userCredentials.refreshToken,
+/* POST REFRESH TOKEN AND UPDATE ACCESS TOKEN */
+
+const refreshToken = async () => {
+  try {
+    fetch("http://localhost:4000/api/auth/refresh", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ token: userCredentials.refreshToken }),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        userCredentials.token = result.accessToken;
+        sessionStorage.setItem(
+          "userCredentials",
+          JSON.stringify(userCredentials)
+        );
+        console.log("Success:", result);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  } catch (err) {
+    console.log(err);
+  }
 };
-fetch("http://localhost:4000/api/auth/refresh", {
-  method: "post",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify(data),
-})
-  .then((response) => response.json())
-  .then((result) => {
-    userCredentials.token = result;
-    console.log("Success:", result);
-  })
-  .catch((error) => {
-    console.error("Error:", error);
-  });
+
+refreshToken();
+const interval = setInterval(() => {
+  refreshToken();
+}, 18000000);
 
 /* LOG OUT AND CLEAR TOKEN */
 logOut.addEventListener("click", () => {

@@ -37,7 +37,7 @@
 
     <div class="ep-wrap" id='ep-wrap'>
         <div class="enter-password">
-            <label>Enter new password</label>
+            <label>Enter new password(must be 8 characters long)</label>
             <form id = 'password-reset-enter-password'>
                 <input type="password" placeholder="Password" id = 'password-reset-entered-password'/>
                 <input type="submit" value="Submit"/>
@@ -68,7 +68,8 @@
     <!-- SignIn Section Ends -->
     <script src="./js/signin.js"></script>
 </body>
-<script>$('.forgot-pass').click(function (event) {
+<script>
+        $('.forgot-pass').click(function (event) {
         $(".pr-wrap").addClass("show-pass-reset");
     });
     </script>
