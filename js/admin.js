@@ -6,7 +6,17 @@ var modalDialog = document.getElementById("record-modal-dialog-box");
 var modalTitle = document.getElementById("record-dialog-box-title");
 var modalStatus = document.getElementById("record-dialog-box-status");
 var modalDesc = document.getElementById("record-dialog-box-desc");
-
+var userCredentials = {
+  token: "",
+  refreshToken: "",
+  username: "",
+  id: "",
+  role: "",
+  auth: false,
+};
+var logOut = document.getElementById("log-out");
+var user = document.getElementById("user");
+var showAdminRegister = document.getElementById("admin-register");
 var filterValue = "";
 var recordList = [];
 loadingSpinner.innerHTML = `
@@ -36,6 +46,45 @@ loadingDataRow.innerHTML = `
 <td> ${loadingSpinner.innerHTML} </td>
 `;
 
+/* CHECK FOR TOKEN AND REDIRECT TO SIGNIN PAGE IF NOT AVAILABLE */
+if (sessionStorage.userCredentials) {
+  userCredentials = JSON.parse(sessionStorage.userCredentials);
+  user.innerText = userCredentials.username;
+
+  // CHECK IF THE USER IS ADMIN
+  if (userCredentials.role === 333) {
+    window.location.replace("/user.html");
+  }
+} else {
+  window.location.replace("/signin.html");
+}
+
+/* LOG OUT AND CLEAR TOKEN */
+logOut.addEventListener("click", () => {
+  fetch("http://localhost:4000/api/auth/logout", {
+    method: "delete",
+    headers: {
+      Authorization: `Bearer ${userCredentials.refreshToken}`,
+    },
+  })
+    .then((response) => console.log(response))
+    .then((result) => {
+      console.log("Success:", result);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+  sessionStorage.removeItem("userCredentials");
+  window.location.replace("/signin.html");
+});
+
+/* SHOW ADMIN REGISTER IF LOGGED BY SUPER ADMIN */
+if (userCredentials.role == 111) {
+  showAdminRegister.innerHTML = "Admin Register";
+} else {
+  showAdminRegister.innerHTML = "";
+}
+
 /* GET REPORT ACCORDING TO FILTER SEARCH */
 filterButton.addEventListener("click", () => {
   filterValue = filterSearch.value;
@@ -46,10 +95,10 @@ filterButton.addEventListener("click", () => {
       .then((res) => res.json())
       .then((data) => {
         recordList = data;
-        console.log(data);
         tableBody.innerHTML = "";
 
         data.forEach((record) => {
+          recordList = data;
           var reportJsonDate = record.reported_at;
           var reportFinalDate = moment(reportJsonDate).format("YYYY-MM-DD");
           const tr = document.createElement("tr");
@@ -60,21 +109,36 @@ filterButton.addEventListener("click", () => {
             <!-- Description PopUp Starts -->
             <td data-label="Description">
               <button
-                onclick= '  document.getElementById("id01").style.display = "block";
-                '
+                onclick= ' showReport(${record.id})'
                 class="w3-button"
                 style="border: 2px solid #000"
               >
                 Read Here
               </button>
+              <div
+                id="id01"
+                class="w3-modal"
+                style="width: 80%; margin-left: 20em"
+              >
+                <div class="w3-modal-content">
+                  <div class="w3-container" style="margin: 100px; height: 50vh">
+                    <span
+                      onclick="document.getElementById('id01').style.display='none'"
+                      class="w3-button w3-display-topright"
+                      >&times;</span
+                    >
+                    <p>${record.description}</p>
+                  </div>
+                </div>
+              </div>
             </td>
             <!-- Description PopUp Ends -->
             <td data-label="Status">
-            <select name='report-status' id='report-status'>
-              <option value = '' selected = 'selected'>Pending</option>
-              <option value = ''>Acceped</option>
-              <option value = ''>Rejected</option>
-            </select>
+            ${record.status}
+            <span>
+            <button class='status-button' onclick='toggleReport(${record.id},"accept")' ><i style="font-size: 15px; margin: 5px" class="fa fa-check-circle"></i></button>
+            <button class='status-button' onclick='toggleReport(${record.id},"reject")'><i style="font-size: 15px; margin: 5px" class="fa fa-times-circle"></i></button>
+            </span>          
             </td>
             `;
           tableBody.appendChild(tr);
@@ -169,21 +233,19 @@ function toggleReport(recordId, statusTo) {
     });
 }
 
-//function to set details in modal dialog box
+/* FUNCTION TO SET DETAIL IN MODAL DIALOG BOX */
 function setRecordInModalDialog(title, status, desc) {
   modalTitle.innerText = title;
   modalStatus.innerText = status;
   modalDesc.innerText = desc;
 }
 
-//function to show report details in modal dialog
+/* FUNCTION TO SHOW REPORT DETAILS IN MODAL DIALOG */
 function showReport(id) {
-  //find index of specified record id
-
   let index = recordList.findIndex((record) => record.id === id);
   console.log(recordList[index]);
 
-  //show modal dialog
+  //SHOW MODAL DIALOG
   setRecordInModalDialog(
     recordList[index].crime_type,
     recordList[index].status,
@@ -192,7 +254,7 @@ function showReport(id) {
   modalDialog.style.display = "block";
 }
 
-//hide modal dialog
+//HIDE MODAL DIALOG
 function hideRecordModalDialog() {
   modalDialog.style.display = "none";
   setRecordInModalDialog("", "", "");

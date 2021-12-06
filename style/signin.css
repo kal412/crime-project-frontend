@@ -141,7 +141,7 @@ form a:hover {
 .pass-reset {
   background: #fff;
   margin: 0 auto;
-  width: 250px;
+  width: 300px;
   position: relative;
   margin-top: 22%;
   z-index: 999;
@@ -189,6 +189,76 @@ form a:hover {
 }
 
 .pass-reset input[type="submit"]:hover {
+  transition: background-color 0.5s ease;
+  background-color: #ce0f3e;
+}
+
+.ep-wrap {
+  background: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  display: none;
+}
+
+.show-enter-password {
+  display: block !important;
+}
+
+.enter-password {
+  background: #fff;
+  margin: 0 auto;
+  width: 300px;
+  position: relative;
+  margin-top: 22%;
+  padding: 20px 15px;
+}
+
+.enter-password label {
+  font-size: 12px;
+  font-weight: 400;
+  font-family: "Open Sans", sans-serif;
+  margin-bottom: 15px;
+}
+
+.enter-password input[type="password"] {
+  font-family: "Open Sans", sans-serif;
+  font-style: italic;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: #000;
+  width: 100%;
+  margin: 5px 0 0 0;
+  padding: 5px 10px;
+  background: 0;
+  border: 0;
+  border-bottom: 1px solid #000;
+  outline: 0;
+  margin-bottom: 5px;
+  outline: 0;
+}
+
+.enter-password input[type="submit"] {
+  font-family: "Open Sans", sans-serif;
+  width: 100%;
+  background: #176fc1;
+  border: 0;
+  padding: 7px;
+  color: #ffffff;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-top: 10px;
+  outline: 0;
+  cursor: pointer;
+}
+
+.enter-password input[type="submit"]:hover {
   transition: background-color 0.5s ease;
   background-color: #ce0f3e;
 }

@@ -5,6 +5,7 @@ var userCredentials = {
   refreshToken: "",
   username: "",
   id: "",
+  role: "",
   auth: false,
 };
 var logOut = document.getElementById("log-out");
@@ -39,6 +40,11 @@ loadingDataRow.innerHTML = `
 if (sessionStorage.userCredentials) {
   userCredentials = JSON.parse(sessionStorage.userCredentials);
   user.innerText = userCredentials.username;
+
+  // CHECK IF THE USER IS USER
+  if (userCredentials.role !== 111) {
+    window.location.replace("/admin.html");
+  }
 } else {
   window.location.replace("/signin.html");
 }
@@ -78,7 +84,7 @@ logOut.addEventListener("click", () => {
     .catch((error) => {
       console.error("Error:", error);
     });
-  sessionStorage.removeItem("userCredential");
+  sessionStorage.removeItem("userCredentials");
   window.location.replace("/signin.html");
 });
 

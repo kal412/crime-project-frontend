@@ -1,11 +1,24 @@
 var signInForm = document.getElementById("signin-form");
 var username = document.getElementById("username");
 var password = document.getElementById("password");
+var passwordResetEnterEmail = document.getElementById(
+  "password-reset-enter-email"
+);
+var passwordResetEnteredEmail = document.getElementById(
+  "password-reset-entered-email"
+);
+var passwordResetEnterPassword = document.getElementById(
+  "password-reset-enter-password"
+);
+var passwordResetEnteredPassword = document.getElementById(
+  "password-reset-entered-password"
+);
 var userCredentials = {
   token: "",
   refreshToken: "",
   username: "",
   id: "",
+  role: "",
   auth: false,
 };
 
@@ -36,9 +49,57 @@ signInForm.addEventListener("submit", (e) => {
         "userCredentials",
         JSON.stringify(userCredentials)
       );
-      window.location.replace("/user.html");
+      if (userCredentials.role == 111 || userCredentials.role == 222) {
+        window.location.replace("/admin.html");
+      } else {
+        window.location.replace("/user.html");
+      }
     })
     .catch((error) => {
       console.error("Error:", error);
     });
 });
+
+/* UPDATE USER PASSWORD */
+passwordResetEnterEmail.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  document.getElementById("pr-wrap").classList.remove("show-pass-reset");
+  let res = await fetch(
+    `http://localhost:4000/api/users/${passwordResetEnteredEmail.value}`
+  ).catch((err) => console.log(err));
+  if (res.status != 404) {
+    userData = await res.json();
+    document.querySelector(".ep-wrap").classList.add("show-enter-password");
+    passwordResetEnterPassword.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      changePassword(userData.id);
+      document
+        .getElementById("ep-wrap")
+        .classList.remove("show-enter-password");
+    });
+  } else {
+    alert("No user registered with following email");
+  }
+});
+
+// FUNCTION CALL AFTER USER ENTERS NEW PASSWORD
+function changePassword(userId) {
+  let data = {
+    password: passwordResetEnteredPassword.value,
+  };
+  fetch(`http://localhost:4000/api/users/${userId}`, {
+    method: "PATCH",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((result) => {
+      console.log("Success:", result);
+      location.reload();
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}

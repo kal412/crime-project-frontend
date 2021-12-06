@@ -25,11 +25,23 @@
     <!-- SignIn Section Starts -->
 
     <!-- Forget Password Section Starts -->
-    <div class="pr-wrap">
+    <div class="pr-wrap" id='pr-wrap'>
         <div class="pass-reset">
-            <label>Enter the email you signed up with</label>
-            <input type="email" placeholder="Email" />
-            <input type="submit" value="Submit" class="password-reset-submit" />
+            <label>Enter the email you registered with</label>
+            <form id = 'password-reset-enter-email' class="enter-email">
+                <input type="email" placeholder="Email" id = 'password-reset-entered-email'/>
+                <input type="submit" value="Submit"/>
+            </form>
+        </div>
+    </div>
+
+    <div class="ep-wrap" id='ep-wrap'>
+        <div class="enter-password">
+            <label>Enter new password</label>
+            <form id = 'password-reset-enter-password'>
+                <input type="password" placeholder="Password" id = 'password-reset-entered-password'/>
+                <input type="submit" value="Submit"/>
+            </form>
         </div>
     </div>
     <!-- Forget Password Section Ends -->
@@ -59,10 +71,7 @@
 <script>$('.forgot-pass').click(function (event) {
         $(".pr-wrap").addClass("show-pass-reset");
     });
-
-    $('.password-reset-submit').click(function (event) {
-        $(".pr-wrap").removeClass("show-pass-reset");
-    });</script>
+    </script>
 
 
 </html>

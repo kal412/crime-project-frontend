@@ -1,0 +1,48 @@
+form {
+  width: 500px;
+  position: fixed;
+  top: 20%;
+  left: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="email"],
+form input[type="name"] {
+  font-family: "Open Sans", sans-serif;
+  color: #000;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  border: 1px solid #000;
+  background: 0;
+  width: 100%;
+  padding: 10px 10px;
+  margin: 20px;
+  margin-bottom: 5px;
+  outline: 0;
+}
+
+form input[type="submit"] {
+  font-family: "Open Sans", sans-serif;
+  color: #fff;
+  background: #176fc1;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 500;
+  width: 100%;
+  padding: 7px;
+  margin-top: 16px;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+}
+
+form input[type="submit"]:hover {
+  transition: background-color 0.5s ease;
+  background-color: gray;
+}

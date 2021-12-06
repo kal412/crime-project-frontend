@@ -14,6 +14,7 @@ registerForm.addEventListener("submit", (e) => {
     email: email.value,
     username: username.value,
     password: password.value,
+    role: 333,
   };
   fetch("http://localhost:4000/api/auth/register", {
     method: "post",
