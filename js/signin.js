@@ -27,6 +27,38 @@ if (sessionStorage.userCredentials) {
   userCredentials = JSON.parse(sessionStorage.userCredentials);
 }
 
+/* FORM VALIDATION */
+const validateSigninForm = () => {
+  let isFormValidated = false;
+  if (username.value == "") alert("Username field can't be empty");
+  if (password.value == "") alert("Password field can't be empty");
+  if (username.value != "" && password.value != "") isFormValidated = true;
+  return isFormValidated;
+};
+
+const validateEnterEmailForm = () => {
+  let isFormValidated = false;
+  if (passwordResetEnteredEmail.value == "")
+    alert("First enter email you have registered with");
+  if (passwordResetEnteredEmail.value != "") isFormValidated = true;
+  return isFormValidated;
+};
+
+const validateEnterPasswordForm = () => {
+  let isFormValidated = false;
+  if (
+    passwordResetEnteredPassword.value == "" ||
+    passwordResetEnteredPassword.value.length < 8
+  )
+    alert("Please enter 8 characters or long password");
+  if (
+    passwordResetEnteredPassword.value != "" &&
+    passwordResetEnteredPassword.value.length >= 8
+  )
+    isFormValidated = true;
+  return isFormValidated;
+};
+
 /* SIGN IN IF USER EXISTS */
 signInForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -34,51 +66,60 @@ signInForm.addEventListener("submit", (e) => {
     username: username.value,
     password: password.value,
   };
-  fetch("http://localhost:4000/api/auth/signin", {
-    method: "post",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  })
-    .then((response) => response.json())
-    .then((result) => {
-      console.log("Success:", result);
-      userCredentials = result;
-      sessionStorage.setItem(
-        "userCredentials",
-        JSON.stringify(userCredentials)
-      );
-      if (userCredentials.role == 111 || userCredentials.role == 222) {
-        window.location.replace("/admin.html");
-      } else {
-        window.location.replace("/user.html");
-      }
+  if (!validateSigninForm()) return;
+  else {
+    fetch("http://localhost:4000/api/auth/signin", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
     })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
+      .then((response) => response.json())
+      .then((result) => {
+        console.log("Success:", result);
+        userCredentials = result;
+        sessionStorage.setItem(
+          "userCredentials",
+          JSON.stringify(userCredentials)
+        );
+        if (userCredentials.role == 111 || userCredentials.role == 222) {
+          window.location.replace("/admin.html");
+        } else {
+          window.location.replace("/user.html");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
 });
 
 /* UPDATE USER PASSWORD */
 passwordResetEnterEmail.addEventListener("submit", async (e) => {
   e.preventDefault();
-  document.getElementById("pr-wrap").classList.remove("show-pass-reset");
-  let res = await fetch(
-    `http://localhost:4000/api/users/${passwordResetEnteredEmail.value}`
-  ).catch((err) => console.log(err));
-  if (res.status != 404) {
-    userData = await res.json();
-    document.querySelector(".ep-wrap").classList.add("show-enter-password");
-    passwordResetEnterPassword.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      changePassword(userData.id);
-      document
-        .getElementById("ep-wrap")
-        .classList.remove("show-enter-password");
-    });
-  } else {
-    alert("No user registered with following email");
+  if (!validateEnterEmailForm()) return;
+  else {
+    document.getElementById("pr-wrap").classList.remove("show-pass-reset");
+    let res = await fetch(
+      `http://localhost:4000/api/users/${passwordResetEnteredEmail.value}`
+    ).catch((err) => console.log(err));
+    if (res.status != 404) {
+      userData = await res.json();
+      document.querySelector(".ep-wrap").classList.add("show-enter-password");
+      passwordResetEnterPassword.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        if (!validateEnterPasswordForm()) return;
+        else {
+          changePassword(userData.id);
+          document
+            .getElementById("ep-wrap")
+            .classList.remove("show-enter-password");
+        }
+      });
+    } else {
+      alert("No user registered with following email");
+    }
   }
 });
 

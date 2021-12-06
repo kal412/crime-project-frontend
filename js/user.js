@@ -1,6 +1,8 @@
 var reportForm = document.getElementById("report-form");
 var user = document.getElementById("user");
 var date = document.getElementById("date");
+var phoneNumber = document.getElementById("phone-number");
+var address = document.getElementById("address");
 var description = document.getElementById("description");
 var category = document.getElementById("category");
 var userCredentials = {
@@ -95,6 +97,26 @@ category.addEventListener("change", () => {
   category.value = category.options[category.selectedIndex].text;
 });
 
+/* VALIDATE FORM */
+const validateRegisterForm = () => {
+  let isFormValidated = false;
+  if (date.value == "") alert("Please select a date");
+  if (phoneNumber.value == "" || phoneNumber.value.length != 10)
+    alert("Please enter a valid phone number");
+  if (address.value == "") alert("Please enter your address");
+  if (description.value == "")
+    alert("Please enter detailed description of crime");
+  if (
+    date.value != "" &&
+    phoneNumber.value != "" &&
+    phoneNumber.value.length == 10 &&
+    address.value != "" &&
+    description.value != ""
+  )
+    isFormValidated = true;
+  return isFormValidated;
+};
+
 /* POST REPORT DETAILS ON DATABASE REPORTS TABLE */
 reportForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -104,21 +126,24 @@ reportForm.addEventListener("submit", (e) => {
     crime_type: category.value,
     user_id: userCredentials.id,
   };
-  fetch("http://localhost:4000/api/reports/new", {
-    method: "post",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${userCredentials.token}`,
-    },
-    body: JSON.stringify(data),
-  })
-    .then((response) => response.json())
-    .then((result) => {
-      reportForm.reset();
-      console.log("Success:", result);
-      alert("Report has been submitted successfully");
+  if (!validateRegisterForm()) return;
+  else {
+    fetch("http://localhost:4000/api/reports/new", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userCredentials.token}`,
+      },
+      body: JSON.stringify(data),
     })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
+      .then((response) => response.json())
+      .then((result) => {
+        reportForm.reset();
+        console.log("Success:", result);
+        alert("Report has been submitted successfully");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
 });
